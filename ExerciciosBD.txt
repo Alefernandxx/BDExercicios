@@ -1,0 +1,70 @@
+Ex 1:
+
+
+Liste matrícula e nome do aluno (INNER JOIN).
+
+select aluno.matricula, usuario.nome from aluno inner join usuario usuario on aluno.usuario_id = usuario.id;
+
+
+Ex 3:
+
+Liste alunos e curso.
+
+
+select aluno.matricula, curso.nome as nome_do_curso from aluno inner join curso on aluno.curso_id = curso.id;
+
+
+Ex 4: 
+
+
+Liste requerimentos com tipo (INNER JOIN).
+
+select requerimento.id, tipo_requerimento.id, tipo_requerimento.descricao from requerimento inner join tipo_requerimento on requerimento.tipo_requerimento_id = tipo_requerimento.id;
+
+
+
+Ex 5:
+
+
+LEFT JOIN alunos e requerimentos.
+
+select usuario.nome, requerimento.id as id_requerimento, requerimento.status from aluno inner join usuario on aluno.usuario_id = usuario.id left join requerimento on aluno.matricula = re
+querimento.aluno_matricula;
+
+
+Ex 6:
+
+Liste alunos sem requerimento (LEFT + IS NULL).
+
+select usuario.nome, aluno.matricula from aluno inner join usuario on aluno.usuario_id = usuario.id left join requerimento on aluno.matricula = requerimento.aluno_matricula where requerimento.id is null;
+
+
+Ex 7: 
+
+RIGHT JOIN requerimentos e anexos.
+
+select requerimento.id, requerimento.status, anexo.id as id_anexo, anexo.descricao from requerimento right join anexo on requerimento.id = anexo.requerimento_id;
+
+
+Ex 8:
+
+
+FULL JOIN aluno e requerimento.
+
+select usuario.nome, aluno.matricula, requerimento.id as id_requerimento, requerimento.status from aluno inner join usuario on aluno.usuario_id = usuario.id full join requerimento on aluno.matricula = requerimento.aluno_matricula;
+
+
+Ex 9: 
+
+
+Tipos nunca solicitados (LEFT).
+
+select tr.id, tr.descricao from tipo_requerimento tr left join requerimento r on tr.id = r.tipo_requerimento_id where r.id is null;
+
+
+Ex 10:
+
+Requerimentos com nome do aluno e tipo.
+
+select usuario.nome as nome_aluno, tr.id as id_tipo_requerimento, tr.descricao, r.id as id_requerimento, r.status, r.data_hora_abertura from requerimento r inner join tipo_requerimento t
+r on r.tipo_requerimento_id = tr.id inner join aluno on r.aluno_matricula = aluno.matricula inner join usuario on aluno.usuario_id = usuario.id;
